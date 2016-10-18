@@ -1,0 +1,51 @@
+{
+  "name": "andr-andreev/yii2-page-change",
+  "description": "Yii 2 Page Change",
+  "homepage": "https://github.com/andr-andreev/yii2-page-change",
+  "type": "project",
+  "license": "GPL-3.0",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.6.0",
+    "yiisoft/yii2": ">=2.0.5",
+    "yiisoft/yii2-bootstrap": "*",
+    "yiisoft/yii2-swiftmailer": "*",
+    "guzzlehttp/guzzle": "~6.0",
+    "html2text/html2text": "^4.0",
+    "sebastian/diff": "^1.4",
+    "zelenin/yii2-rss": "~0.1"
+  },
+  "require-dev": {
+    "yiisoft/yii2-codeception": "*",
+    "yiisoft/yii2-debug": "*",
+    "yiisoft/yii2-gii": "*",
+    "yiisoft/yii2-faker": "*",
+    "squizlabs/php_codesniffer": "2.*"
+  },
+  "config": {
+    "process-timeout": 1800
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "yii\\composer\\Installer::postCreateProject"
+    ]
+  },
+  "extra": {
+    "yii\\composer\\Installer::postCreateProject": {
+      "setPermission": [
+        {
+          "runtime": "0777",
+          "web/assets": "0777",
+          "yii": "0755"
+        }
+      ],
+      "generateCookieValidationKey": [
+        "config/web.php"
+      ]
+    },
+    "asset-installer-paths": {
+      "npm-asset-library": "vendor/npm",
+      "bower-asset-library": "vendor/bower"
+    }
+  }
+}
