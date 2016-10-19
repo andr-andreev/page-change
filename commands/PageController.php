@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7;
 use Html2Text\Html2Text;
+use Symfony\Component\DomCrawler\Crawler;
 use Yii;
 use yii\console\Controller;
 use app\models\Page;
@@ -100,7 +101,11 @@ class PageController extends Controller
             }
         }
 
-        $formatter = new Html2Text($content, ['width' => 0]);
+        // using DomCrawler component to convert encoding to utf-8
+        $crawler = new Crawler($content);
+
+        // using Html2Text to get clean text
+        $formatter = new Html2Text($crawler->html(), ['width' => 0]);
 
         return $formatter->getText();
     }
