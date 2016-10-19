@@ -11,9 +11,10 @@
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
     "guzzlehttp/guzzle": "~6.0",
-    "html2text/html2text": "^4.0",
-    "sebastian/diff": "^1.4",
-    "zelenin/yii2-rss": "~0.1"
+    "html2text/html2text": "~4.0",
+    "sebastian/diff": "~1.4",
+    "zelenin/yii2-rss": "~0.1",
+    "symfony/dom-crawler": "~3.1"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
