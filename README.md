@@ -9,7 +9,7 @@ Useful for monitoring jobs, price changes, seasonal promos, news, etc.
 
 ### Requirements
 * PHP >= 5.6
-* SQlite 3
+* SQLite 3
 * Composer
 
 ### Installation
