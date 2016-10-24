@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
+
 /**
  * This is the model class for table "page".
  *
@@ -14,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $filter_from
  * @property string $filter_to
  * @property string $last_content
+ * @property string $last_status
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -34,8 +36,9 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             [['url'], 'required'],
-            [['last_content'], 'string'],
-            [['description', 'url', 'filter_from', 'filter_to'], 'string', 'max' => 255],
+            ['url', 'url', 'defaultScheme' => 'http'],
+            [['last_content', 'last_status'], 'string'],
+            [['description', 'filter_from', 'filter_to'], 'string', 'max' => 255],
         ];
     }
 
@@ -67,4 +70,6 @@ class Page extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Change::className(), ['page_id' => 'id']);
     }
+
+
 }
