@@ -32,7 +32,8 @@ trait PageTrait
         return ['content' => $newContent, 'diff' => $diff];
     }
 
-    public function saveChange(Page $page, $diff) {
+    public function saveChange(Page $page, $diff)
+    {
         $change = new Change();
         $change->page_id = $page->id;
         if (!empty($diff['diff'])) {
@@ -42,8 +43,7 @@ trait PageTrait
             $page->last_content = $diff['content'];
             $page->last_status = '';
             $page->save();
-        }
-        elseif (!empty($diff['status']) && $page->last_status !== $diff['status']) {
+        } elseif (!empty($diff['status']) && $page->last_status !== $diff['status']) {
             $change->status = $diff['status'];
             $change->save();
 
@@ -90,7 +90,9 @@ trait PageTrait
 
     private function getContent($url)
     {
-        $client = new Client(['timeout' => 10.0]);
+        $client = new Client([
+            'timeout' => \Yii::$app->params['timeout']
+        ]);
 
         try {
             $response = $client->request('GET', $url, [
@@ -110,7 +112,9 @@ trait PageTrait
         $crawler = new Crawler($content);
 
         // using Html2Text to get clean text
-        $formatter = new Html2Text($crawler->html(), ['width' => 0]);
+        $formatter = new Html2Text($crawler->html(), [
+            'width' => \Yii::$app->params['textWidth']
+        ]);
 
         return ['content' => trim($formatter->getText())];
     }
