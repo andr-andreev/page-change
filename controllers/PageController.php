@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Change;
+use app\controllers\PageTrait;
 use Yii;
 use app\models\Page;
 use app\models\PageSearch;
@@ -22,6 +23,9 @@ class PageController extends Controller
     /**
      * @inheritdoc
      */
+
+    use PageTrait;
+
     public function behaviors()
     {
         return [
@@ -29,6 +33,7 @@ class PageController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'check' => ['POST'],
                 ],
             ],
         ];
@@ -126,7 +131,7 @@ class PageController extends Controller
     public function actionRss()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Change::find()->orderBy(['id' => SORT_DESC]),
+            'query' => Change::find()->innerJoinWith(['page'])->orderBy(['id' => SORT_DESC]),
             'pagination' => [
                 'pageSize' => 100
             ],
@@ -154,7 +159,7 @@ class PageController extends Controller
                 },
                 'description' => function ($model, $widget, Feed $feed) {
                     $formatter = \Yii::$app->formatter;
-                    return $formatter->asNtext($model->diff);
+                    return $formatter->asNtext(empty($model->status) ? $model->diff : $model->status);
                 },
                 'link' => function ($model, $widget, Feed $feed) {
                     return $model->page->url;
@@ -168,6 +173,15 @@ class PageController extends Controller
                 }
             ]
         ]);
+    }
+
+    public function actionCheck($id) {
+        $page = $this->findModel($id);
+
+        $diff = $this->makeChange($page);
+        $this->saveChange($page, $diff);
+
+        return $this->redirect(['page/view', 'id' => $id]);
     }
 
     /**
