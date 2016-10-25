@@ -84,7 +84,7 @@ class PageController extends Controller
         $model = new Page();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->actionCheck($model->id);
         } else {
             return $this->render('create', [
                 'model' => $model,
