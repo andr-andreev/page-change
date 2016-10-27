@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $id
  * @property integer $page_id
  * @property string $diff
+ * @property string $status
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -32,7 +33,7 @@ class Change extends \yii\db\ActiveRecord
         return [
             [['page_id'], 'required'],
             [['page_id'], 'integer'],
-            [['diff'], 'string'],
+            [['diff', 'status'], 'string'],
         ];
     }
 
