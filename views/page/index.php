@@ -29,8 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(empty($data->description) ? $data->url : $data->description, $data->url);
                 },
             ],
-            'filter_from',
-            'filter_to',
+            [
+                'attribute' => 'filter_from',
+                'label' => 'Filter',
+                'format' => 'html',
+                'value' => function ($data) {
+                    return $data['filter_from'] && $data['filter_from'] ? '<span class="glyphicon glyphicon-ok"></span>' : '';
+                },
+            ],
              'updated_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
