@@ -41,7 +41,7 @@ class PageSearch extends Page
      */
     public function search($params)
     {
-        $query = Page::find();
+        $query = Page::find()->joinWith(['category']);
 
         // add conditions that should always apply here
 

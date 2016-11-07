@@ -38,6 +38,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav '],
         'items' => [
             ['label' => 'Webpages', 'url' => Url::toRoute('page/index')],
+            ['label' => 'Categories', 'url' => Url::toRoute('category/index')],
             ['label' => 'RSS', 'url' => Url::toRoute('page/rss')],
         ],
     ]);
