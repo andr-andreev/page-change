@@ -139,7 +139,7 @@ class PageController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Change::find()->innerJoinWith(['page'])->orderBy(['id' => SORT_DESC]),
             'pagination' => [
-                'pageSize' => 100
+                'pageSize' => Yii::$app->params['rssItemsCount']
             ],
         ]);
 
