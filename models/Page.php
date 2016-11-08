@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "page".
  *
  * @property integer $id
+ * @property integer $category_id
  * @property string $description
  * @property string $url
  * @property string $filter_from
@@ -37,6 +38,7 @@ class Page extends \yii\db\ActiveRecord
         return [
             [['url'], 'required'],
             ['url', 'url', 'defaultScheme' => 'http'],
+            [['category_id'], 'integer'],
             [['last_content', 'last_status'], 'string'],
             [['description', 'filter_from', 'filter_to'], 'string', 'max' => 255],
         ];
@@ -71,5 +73,8 @@ class Page extends \yii\db\ActiveRecord
         return $this->hasMany(Change::className(), ['page_id' => 'id']);
     }
 
-
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
 }

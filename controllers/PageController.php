@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Change;
 use app\controllers\PageTrait;
 use Yii;
 use app\models\Page;
 use app\models\PageSearch;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,6 +70,7 @@ class PageController extends Controller
             ],
         ]);
 
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'changes' => $changesDataProvider
@@ -102,11 +105,14 @@ class PageController extends Controller
     {
         $model = $this->findModel($id);
 
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'categories' => $categories
             ]);
         }
     }
@@ -133,7 +139,7 @@ class PageController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Change::find()->innerJoinWith(['page'])->orderBy(['id' => SORT_DESC]),
             'pagination' => [
-                'pageSize' => 100
+                'pageSize' => Yii::$app->params['rssItemsCount']
             ],
         ]);
 

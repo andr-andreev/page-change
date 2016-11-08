@@ -41,13 +41,17 @@ class PageSearch extends Page
      */
     public function search($params)
     {
-        $query = Page::find();
+        $query = Page::find()->joinWith(['category'])->orderBy([
+            'category.title' => SORT_ASC,
+            'description' => SORT_ASC,
+            'url' => SORT_ASC
+        ]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['description' => SORT_ASC]]
+//            'sort' => ['defaultOrder' => ['category_id' => SORT_ASC]]
         ]);
 
         $this->load($params);
