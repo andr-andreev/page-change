@@ -12,6 +12,9 @@ use app\models\Page;
  */
 class PageSearch extends Page
 {
+    public $category_title;
+
+
     /**
      * @inheritdoc
      */
@@ -19,6 +22,7 @@ class PageSearch extends Page
     {
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
+            [['category_title'], 'safe'],
             [['description', 'url', 'filter_from', 'filter_to', 'last_content'], 'safe'],
         ];
     }
@@ -41,18 +45,25 @@ class PageSearch extends Page
      */
     public function search($params)
     {
-        $query = Page::find()->joinWith(['category'])->orderBy([
-            'category.title' => SORT_ASC,
-            'description' => SORT_ASC,
-            'url' => SORT_ASC
-        ]);
+        $query = Page::find()->joinWith(['category']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-//            'sort' => ['defaultOrder' => ['category_id' => SORT_ASC]]
+            'sort' => [
+                'defaultOrder' => [
+                    'category_title' => SORT_ASC,
+                    'description' => SORT_ASC,
+                    'url' => SORT_ASC
+                ]
+            ]
         ]);
+
+        $dataProvider->sort->attributes['category_title'] = [
+            'asc' => ['category.title' => SORT_ASC],
+            'desc' => ['category.title' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -69,7 +80,9 @@ class PageSearch extends Page
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'description', $this->description])
+        $query
+            ->andFilterWhere(['like', 'category.title', $this->category_title])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'filter_from', $this->filter_from])
             ->andFilterWhere(['like', 'filter_to', $this->filter_to])

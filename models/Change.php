@@ -62,4 +62,9 @@ class Change extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Page::className(), ['id' => 'page_id']);
     }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id'])->via('page');
+    }
 }

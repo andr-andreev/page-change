@@ -21,7 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'category.title',
+            [
+                'attribute' => 'category_title',
+                'value' => 'category.title'
+            ],
             [
                 'attribute' => 'description',
                 'format' => 'html',
@@ -37,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data['filter_from'] && $data['filter_from'] ? '<span class="glyphicon glyphicon-ok"></span>' : '';
                 },
             ],
-             'updated_at:datetime',
+            'updated_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

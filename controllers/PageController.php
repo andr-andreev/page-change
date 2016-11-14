@@ -137,7 +137,7 @@ class PageController extends Controller
     public function actionRss()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Change::find()->innerJoinWith(['page'])->orderBy(['id' => SORT_DESC]),
+            'query' => Change::find()->innerJoinWith('page')->innerJoinWith('category')->orderBy(['id' => SORT_DESC]),
             'pagination' => [
                 'pageSize' => Yii::$app->params['rssItemsCount']
             ],
@@ -161,7 +161,12 @@ class PageController extends Controller
             ],
             'items' => [
                 'title' => function ($model, $widget, Feed $feed) {
-                    return empty($model->page->description) ? $model->page->url : $model->page->description;
+                    $categoryPart = $model->category->title . ' / ';
+                    if (empty($model->page->description)) {
+                        return $categoryPart . $model->page->url;
+                    }
+
+                    return $categoryPart . $model->page->description;
                 },
                 'description' => function ($model, $widget, Feed $feed) {
                     $formatter = \Yii::$app->formatter;
@@ -181,7 +186,8 @@ class PageController extends Controller
         ]);
     }
 
-    public function actionCheck($id) {
+    public function actionCheck($id)
+    {
         $page = $this->findModel($id);
 
         $diff = $this->makeChange($page);
