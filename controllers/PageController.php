@@ -58,13 +58,16 @@ class PageController extends Controller
 
     /**
      * Displays a single Page model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         $changesDataProvider = new ActiveDataProvider([
-            'query' => Change::find()->where(['page_id' => $id])->orderBy(['id' => SORT_DESC]),
+            'query' => $model->getChanges()->orderBy(['id' => SORT_DESC]),
             'pagination' => [
                 'pageSize' => 10
             ],
@@ -72,7 +75,7 @@ class PageController extends Controller
 
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'changes' => $changesDataProvider
         ]);
     }
@@ -91,6 +94,7 @@ class PageController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
             ]);
         }
     }
@@ -98,21 +102,21 @@ class PageController extends Controller
     /**
      * Updates an existing Page model.
      * If update is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'categories' => $categories
+                'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
             ]);
         }
     }
@@ -120,7 +124,9 @@ class PageController extends Controller
     /**
      * Deletes an existing Page model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -137,7 +143,7 @@ class PageController extends Controller
     public function actionRss()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Change::find()->innerJoinWith('page')->innerJoinWith('category')->orderBy(['id' => SORT_DESC]),
+            'query' => Change::find()->innerJoinWith(['page', 'category'])->orderBy(['id' => SORT_DESC]),
             'pagination' => [
                 'pageSize' => Yii::$app->params['rssItemsCount']
             ],
@@ -170,6 +176,7 @@ class PageController extends Controller
                 },
                 'description' => function ($model, $widget, Feed $feed) {
                     $formatter = \Yii::$app->formatter;
+
                     return $formatter->asNtext(empty($model->status) ? $model->diff : $model->status);
                 },
                 'link' => function ($model, $widget, Feed $feed) {
@@ -180,6 +187,7 @@ class PageController extends Controller
                 },
                 'pubDate' => function ($model, $widget, Feed $feed) {
                     $date = \DateTime::createFromFormat('U', $model->updated_at);
+
                     return $date->format(DATE_RSS);
                 }
             ]
@@ -199,7 +207,9 @@ class PageController extends Controller
     /**
      * Finds the Page model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return Page the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

@@ -56,14 +56,19 @@ class PageSearch extends Page
                     'category_title' => SORT_ASC,
                     'description' => SORT_ASC,
                     'url' => SORT_ASC
+                ],
+                'attributes'   => [
+	                'description',
+	                'url',
+	                'filter_from',
+	                'updated_at',
+	                'category_title' => [
+		                'asc'  => [ 'category.title' => SORT_ASC ],
+		                'desc' => [ 'category.title' => SORT_DESC ],
+	                ]
                 ]
             ]
-        ]);
-
-        $dataProvider->sort->attributes['category_title'] = [
-            'asc' => ['category.title' => SORT_ASC],
-            'desc' => ['category.title' => SORT_DESC],
-        ];
+        ] );
 
         $this->load($params);
 
