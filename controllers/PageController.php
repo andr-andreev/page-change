@@ -91,7 +91,8 @@ class PageController extends Controller
             return $this->actionCheck($model->id);
         } else {
             return $this->render('create', [
-                'model' => $model,
+	            'model'      => $model,
+	            'categories' => ArrayHelper::map( Category::find()->all(), 'id', 'title' )
             ]);
         }
     }
@@ -106,14 +107,12 @@ class PageController extends Controller
     {
         $model = $this->findModel($id);
 
-        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
-                'model' => $model,
-                'categories' => $categories
+	            'model'      => $model,
+	            'categories' => ArrayHelper::map( Category::find()->all(), 'id', 'title' )
             ]);
         }
     }

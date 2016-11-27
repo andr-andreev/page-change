@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Page */
+/* @var $categories array */
 
 $this->title = 'Edit webpage: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
