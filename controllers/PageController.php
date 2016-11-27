@@ -63,17 +63,18 @@ class PageController extends Controller
      */
     public function actionView($id)
     {
+	    $model               = $this->findModel( $id );
         $changesDataProvider = new ActiveDataProvider([
-            'query' => Change::find()->where(['page_id' => $id])->orderBy(['id' => SORT_DESC]),
-            'pagination' => [
+	        'query'      => $model->getChanges()->orderBy( [ 'id' => SORT_DESC ] ),
+	        'pagination' => [
                 'pageSize' => 10
             ],
         ]);
 
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'changes' => $changesDataProvider
+	        'model'   => $model,
+	        'changes' => $changesDataProvider
         ]);
     }
 
@@ -137,8 +138,8 @@ class PageController extends Controller
     public function actionRss()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Change::find()->innerJoinWith('page')->innerJoinWith('category')->orderBy(['id' => SORT_DESC]),
-            'pagination' => [
+	        'query'      => Change::find()->innerJoinWith( [ 'page', 'category' ] )->orderBy( [ 'id' => SORT_DESC ] ),
+	        'pagination' => [
                 'pageSize' => Yii::$app->params['rssItemsCount']
             ],
         ]);
