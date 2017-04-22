@@ -8,7 +8,7 @@ use app\models\Page;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7;
-use Html2Text\Html2Text;
+use League\HTMLToMarkdown\HtmlConverter;
 use Symfony\Component\DomCrawler\Crawler;
 use SebastianBergmann\Diff\Differ;
 
@@ -108,15 +108,17 @@ trait PageTrait
             return ['status' => $status];
         }
 
-        // using DomCrawler component to convert encoding to utf-8
+        // using DomCrawler component to convert document encoding to utf-8
         $crawler = new Crawler($content);
+        $html = $crawler->html();
 
-        // using Html2Text to get clean text
-        $formatter = new Html2Text($crawler->html(), [
-            'width' => \Yii::$app->params['textWidth']
-        ]);
+        $converter = new HtmlConverter();
+        $config = $converter->getConfig();
+        $config->setOption('strip_tags', true);
+        $config->setOption('remove_nodes', 'script style');
+        $markdown = $converter->convert($html);
 
-        return ['content' => trim($formatter->getText())];
+        return ['content' => $markdown];
     }
 
     private function filterContent($content, $filterFrom, $filterTo)
