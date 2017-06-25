@@ -19,10 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'filter_from')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'filter_from')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'filter_to')->textInput(['maxlength' => true]) ?>
-
+        <div class="col-md-6">
+            <?= $form->field($model, 'filter_to')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Follow' : 'Update',
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
