@@ -14,13 +14,14 @@
     "sebastian/diff": "~1.4",
     "zelenin/yii2-rss": "~0.1",
     "symfony/dom-crawler": "~3.1",
-    "league/html-to-markdown": "^4.4"
+    "league/html-to-markdown": "^4.4",
+    "rmrevin/yii2-fontawesome": "^2.17"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "*",
     "yiisoft/yii2-gii": "*",
     "yiisoft/yii2-faker": "*",
-    "squizlabs/php_codesniffer": "2.*"
+    "squizlabs/php_codesniffer": "3.*"
   },
   "config": {
     "process-timeout": 1800

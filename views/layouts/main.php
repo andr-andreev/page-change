@@ -3,12 +3,13 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Html;
+use app\assets\AppAsset;
+use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use yii\helpers\Html;
 use yii\helpers\Url;
-use app\assets\AppAsset;
+use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
 ?>
@@ -36,10 +37,11 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav '],
+        'encodeLabels' => false,
         'items' => [
-            ['label' => 'Webpages', 'url' => Url::toRoute('page/index')],
-            ['label' => 'Categories', 'url' => Url::toRoute('category/index')],
-            ['label' => 'RSS', 'url' => Url::toRoute('page/rss')],
+            ['label' => FA::icon(FA::_LIST) . ' Webpages', 'url' => Url::toRoute('page/index')],
+            ['label' => FA::icon(FA::_TH_LIST) . ' Categories', 'url' => Url::toRoute('category/index')],
+            ['label' => FA::icon(FA::_RSS) . ' RSS', 'url' => Url::toRoute('page/rss')],
         ],
     ]);
     NavBar::end();

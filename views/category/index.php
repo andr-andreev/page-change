@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
+use app\widgets\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -19,10 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-//            'id',
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'headerOptions' => [
+                    'width' => 40,
+                ],
+            ],
             'title',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => ActionColumn::className(),
+                'headerOptions' => [
+                    'width' => 170,
+                    'class' => 'text-center'
+                ],
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
 </div>
