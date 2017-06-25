@@ -28,6 +28,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'filter_to')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+
+    <?= $form->field($model, 'is_active')->checkbox() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Follow' : 'Update',
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
