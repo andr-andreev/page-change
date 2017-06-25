@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Page;
 
 /**
  * PageSearch represents the model behind the search form about `app\models\Page`.
@@ -21,9 +19,9 @@ class PageSearch extends Page
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at'], 'integer'],
-            [['category_title'], 'safe'],
-            [['description', 'url', 'filter_from', 'filter_to', 'last_content'], 'safe'],
+            [['id', 'created_at',], 'integer'],
+            [['category_title', 'is_active'], 'safe'],
+            [['description', 'url', 'last_content'], 'safe'],
         ];
     }
 
@@ -58,6 +56,7 @@ class PageSearch extends Page
                     'url' => SORT_ASC
                 ],
                 'attributes'   => [
+                    'is_active',
 	                'description',
 	                'url',
 	                'filter_from',
@@ -86,7 +85,8 @@ class PageSearch extends Page
         ]);
 
         $query
-            ->andFilterWhere(['like', 'category.title', $this->category_title])
+            ->andFilterWhere(['like', 'is_active', $this->is_active])
+            ->andFilterWhere(['like', 'category.id', $this->category_title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'filter_from', $this->filter_from])
