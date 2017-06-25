@@ -46,9 +46,6 @@ $config = [
                 'rss' => 'page/rss'
             ],
         ],
-        'formatter' => [
-            'datetimeFormat' => 'd.M.Y H:i',
-        ],
     ],
     'params' => $params,
 ];
