@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-  "content-hash": "72a98fabfc7d2137796e5b7de70d215d",
+  "content-hash": "884ef82557ae2adcb94e84f4e57219d1",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -315,8 +315,56 @@
           "time": "2017-06-03T02:28:16+00:00"
         },
         {
+          "name": "fortawesome/font-awesome",
+          "version": "v4.7.0",
+          "source": {
+            "type": "git",
+            "url": "https://github.com/FortAwesome/Font-Awesome.git",
+            "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
+          },
+          "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
+            "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
+            "shasum": ""
+          },
+          "require-dev": {
+            "jekyll": "1.0.2",
+            "lessc": "1.4.2"
+          },
+          "type": "library",
+          "extra": {
+            "branch-alias": {
+              "dev-master": "4.6.x-dev"
+            }
+          },
+          "notification-url": "https://packagist.org/downloads/",
+          "license": [
+            "OFL-1.1",
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Dave Gandy",
+              "email": "dave@fontawesome.io",
+              "homepage": "http://twitter.com/davegandy",
+              "role": "Developer"
+            }
+          ],
+          "description": "The iconic font and CSS framework",
+          "homepage": "http://fontawesome.io/",
+          "keywords": [
+            "FontAwesome",
+            "awesome",
+            "bootstrap",
+            "font",
+            "icon"
+          ],
+          "time": "2016-10-24T15:52:54+00:00"
+        },
+      {
             "name": "guzzlehttp/guzzle",
-          "version": "6.3.0",
+        "version": "6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
@@ -338,9 +386,9 @@
               "phpunit/phpunit": "^4.0 || ^5.0",
                 "psr/log": "^1.0"
             },
-          "suggest": {
-            "psr/log": "Required for using the Log middleware"
-          },
+        "suggest": {
+          "psr/log": "Required for using the Log middleware"
+        },
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -377,7 +425,7 @@
                 "rest",
                 "web service"
             ],
-          "time": "2017-06-22T18:50:49+00:00"
+        "time": "2017-06-22T18:50:49+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -610,8 +658,60 @@
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
+          "name": "rmrevin/yii2-fontawesome",
+          "version": "2.17.1",
+          "source": {
+            "type": "git",
+            "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+            "reference": "65ce306da864f4d558348aeba040ed7876878090"
+          },
+          "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/65ce306da864f4d558348aeba040ed7876878090",
+            "reference": "65ce306da864f4d558348aeba040ed7876878090",
+            "shasum": ""
+          },
+          "require": {
+            "fortawesome/font-awesome": "~4.7",
+            "php": ">=5.4.0",
+            "yiisoft/yii2": "2.0.*"
+          },
+          "type": "yii2-extension",
+          "extra": {
+            "asset-installer-paths": {
+              "npm-asset-library": "vendor/npm",
+              "bower-asset-library": "vendor/bower"
+            }
+          },
+          "autoload": {
+            "psr-4": {
+              "rmrevin\\yii\\fontawesome\\": ""
+            }
+          },
+          "notification-url": "https://packagist.org/downloads/",
+          "license": [
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Revin Roman",
+              "email": "roman@rmrevin.com",
+              "homepage": "https://rmrevin.com/"
+            }
+          ],
+          "description": "Asset Bundle for Yii2 with Font Awesome",
+          "keywords": [
+            "asset",
+            "awesome",
+            "bundle",
+            "font",
+            "yii"
+          ],
+          "time": "2017-01-11T14:05:47+00:00"
+        },
+      {
             "name": "sebastian/diff",
-          "version": "1.4.3",
+        "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
@@ -659,7 +759,7 @@
             "keywords": [
                 "diff"
             ],
-          "time": "2017-05-22T07:24:03+00:00"
+        "time": "2017-05-22T07:24:03+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
