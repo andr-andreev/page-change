@@ -1,14 +1,18 @@
 ## yii2-page-change
-Page Change is a simple webpage monitoring app based on Yii 2 framework.
+Page Change is a simple webpage monitoring app based on  [Yii 2 framework](https://github.com/yiisoft/yii2).
 
 Useful for monitoring jobs, price changes, seasonal promos, news, etc.
+
+![Dashboard](screenshots/dashboard.png?raw=true "Dashboard")
+
+![Page history](screenshots/page-history.png?raw=true "Page history")
 
 ### Features
 * Block filter (ignore everything except the text between the markers)
 * One RSS feed for all pages changes
 
 ### Requirements
-* PHP >= 5.6
+* PHP >= 7.1
 * SQLite 3
 * Composer
 
