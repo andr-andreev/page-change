@@ -94,4 +94,12 @@ class Page extends \yii\db\ActiveRecord
     {
         return $this->is_active === static::STATUS_ACTIVE;
     }
+
+    public static function statusList()
+    {
+        return [
+            static::STATUS_ACTIVE => 'Active',
+            static::STATUS_INACTIVE => 'Inactive',
+        ];
+    }
 }
