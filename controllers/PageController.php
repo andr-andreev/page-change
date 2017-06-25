@@ -2,20 +2,21 @@
 
 namespace app\controllers;
 
+use app\controllers\PageChange;
 use app\models\Category;
 use app\models\Change;
-use app\controllers\PageTrait;
-use Yii;
 use app\models\Page;
 use app\models\PageSearch;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\di\Container;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use Zelenin\yii\extensions\Rss\RssView;
 use Zelenin\Feed;
+use Zelenin\yii\extensions\Rss\RssView;
 
 /**
  * PageController implements the CRUD actions for Page model.
@@ -25,8 +26,6 @@ class PageController extends Controller
     /**
      * @inheritdoc
      */
-
-    use PageTrait;
 
     public function behaviors()
     {
@@ -81,6 +80,24 @@ class PageController extends Controller
     }
 
     /**
+     * Finds the Page model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     *
+     * @param integer $id
+     *
+     * @return Page the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Page::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
      * Creates a new Page model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      * @return mixed
@@ -97,6 +114,21 @@ class PageController extends Controller
                 'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
             ]);
         }
+    }
+
+    public function actionCheck($id)
+    {
+        $page = $this->findModel($id);
+
+        $container = new Container;
+
+        /** @var \app\components\pagechange\PageChange $pageChange */
+        $pageChange = $container->get(\app\components\pagechange\PageChange::className(), [$page]);
+
+        $diff = $pageChange->makeChange();
+        $pageChange->saveChange($diff);
+
+        return $this->redirect(['page/view', 'id' => $id]);
     }
 
     /**
@@ -192,33 +224,5 @@ class PageController extends Controller
                 }
             ]
         ]);
-    }
-
-    public function actionCheck($id)
-    {
-        $page = $this->findModel($id);
-
-        $diff = $this->makeChange($page);
-        $this->saveChange($page, $diff);
-
-        return $this->redirect(['page/view', 'id' => $id]);
-    }
-
-    /**
-     * Finds the Page model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     *
-     * @param integer $id
-     *
-     * @return Page the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Page::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 }
