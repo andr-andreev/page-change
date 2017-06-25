@@ -105,15 +105,16 @@ class PageController extends Controller
     public function actionCreate()
     {
         $model = new Page();
+        $model->is_active = Page::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->actionCheck($model->id);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+            'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
+        ]);
     }
 
     public function actionCheck($id)

@@ -13,7 +13,7 @@ class PageController extends Controller
     public function actionCheck()
     {
         $container = new Container;
-        $pages = Page::find()->all();
+        $pages = Page::find()->active()->all();
 
         /* @var $page \app\models\Page */
         foreach ($pages as $page) {

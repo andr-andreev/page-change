@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 
@@ -10,6 +9,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "page".
  *
  * @property integer $id
+ * @property integer $is_active
  * @property integer $category_id
  * @property string $description
  * @property string $url
@@ -22,6 +22,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Page extends \yii\db\ActiveRecord
 {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+
     /**
      * @inheritdoc
      */
@@ -39,6 +42,7 @@ class Page extends \yii\db\ActiveRecord
             [['url'], 'required'],
             ['url', 'url', 'defaultScheme' => 'http'],
             [['category_id'], 'integer'],
+            [['is_active'], 'in', 'range' => [static::STATUS_ACTIVE, static::STATUS_INACTIVE]],
             [['last_content', 'last_status'], 'string'],
             [['description', 'filter_from', 'filter_to'], 'string', 'max' => 255],
         ];
@@ -51,7 +55,9 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'description' => 'Description',
+            'is_active' => 'Active',
+            'category_id' => 'Category',
+            'description' => 'Title',
             'url' => 'Url',
             'filter_from' => 'Filter From',
             'filter_to' => 'Filter To',
@@ -68,6 +74,12 @@ class Page extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function find()
+    {
+        return new PageQuery(get_called_class());
+    }
+
+
     public function getChanges()
     {
         return $this->hasMany(Change::className(), ['page_id' => 'id']);
@@ -76,5 +88,10 @@ class Page extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function isActive()
+    {
+        return $this->is_active === static::STATUS_ACTIVE;
     }
 }
