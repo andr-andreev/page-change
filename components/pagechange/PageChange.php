@@ -6,13 +6,13 @@ namespace app\components\pagechange;
 
 use app\models\Change;
 use app\models\Page;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Class PageChange
  * @package app\components\pagechange
  */
-class PageChange extends Object
+class PageChange extends BaseObject
 {
     /** @var  Page */
     protected $page;
