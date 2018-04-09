@@ -1,5 +1,4 @@
 install:
-	composer global require "fxp/composer-asset-plugin:^1.2.0"
 	composer install
 	php yii migrate
 
@@ -8,6 +7,3 @@ autoload:
 
 lint:
 	composer exec 'phpcs --standard=PSR2 src tests web'
-
-test:
-	composer exec 'phpunit tests'
