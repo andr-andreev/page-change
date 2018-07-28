@@ -82,6 +82,6 @@ class Change extends \yii\db\ActiveRecord
             $parts[] = $this->page->description ?: $this->page->url;
         }
 
-        return implode(' / ', $parts);
+        return implode(' / ', $parts) ?: '(not set)';
     }
 }
