@@ -7,15 +7,15 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.1.0",
+    "guzzlehttp/guzzle": "~6.0",
+    "league/html-to-markdown": "^4.4",
+    "rmrevin/yii2-fontawesome": "^2.17",
+    "sebastian/diff": "~1.4",
+    "symfony/dom-crawler": "~3.1",
     "yiisoft/yii2": ">=2.0.5",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
-    "guzzlehttp/guzzle": "~6.0",
-    "sebastian/diff": "~1.4",
-    "zelenin/yii2-rss": "~0.1",
-    "symfony/dom-crawler": "~3.1",
-    "league/html-to-markdown": "^4.4",
-    "rmrevin/yii2-fontawesome": "^2.17"
+    "zelenin/yii2-rss": "~0.1"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "*",
@@ -30,6 +30,7 @@
     }
   ],
   "config": {
+    "sort-packages" : true,
     "process-timeout": 1800
   },
   "scripts": {
