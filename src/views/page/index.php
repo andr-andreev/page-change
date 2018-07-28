@@ -3,8 +3,6 @@
 use app\models\Category;
 use app\models\Page;
 use app\widgets\ActionColumn;
-use rmrevin\yii\fontawesome\FA;
-use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -17,12 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="mb-3">
+        <?= Html::encode($this->title) ?>
 
-    <p>
         <?= Html::a('Follow a new webpage', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
+    </h1>
+
+    <?= \luya\bootstrap4\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -31,14 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'is_active',
                 'format' => 'raw',
                 'filter' => Page::statusList(),
-                'value' => function (Page $data) {
-                    return FA::icon($data->is_active ? FA::_CHECK : FA::_TIMES);
-                },
+                'class' => \app\widgets\BooleanColumn::class,
                 'headerOptions' => [
                     'width' => 100,
-                    'class' => 'text-center',
                 ],
-                'contentOptions' => ['class' => 'text-center'],
             ],
             [
                 'header' => 'Category',
@@ -62,20 +57,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'filter_from',
                 'label' => 'Filter',
                 'format' => 'raw',
+                'class' => \app\widgets\BooleanColumn::class,
                 'value' => function (Page $data) {
-                    return FA::icon($data->filter_from && $data->filter_from ? FA::_CHECK : FA::_TIMES);
+                    return $data->filter_from && $data->filter_to;
                 },
                 'headerOptions' => [
                     'width' => 80,
-                    'class' => 'text-center',
                 ],
-                'contentOptions' => ['class' => 'text-center'],
             ],
             'updated_at:datetime',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'template' => '{view} {update} {delete}',
             ],
         ],
+        'summaryOptions' => ['class' => 'mb-2']
     ]); ?>
 </div>

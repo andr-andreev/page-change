@@ -4,7 +4,9 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'pagechange',
-    'basePath' => dirname(__DIR__),
+    'basePath' => dirname(__DIR__) . '/src',
+    'runtimePath' => dirname(__DIR__) . '/runtime',
+    'vendorPath' => dirname(__DIR__) . '/vendor',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
@@ -21,13 +23,6 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -43,7 +38,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'page/index',
-                'rss' => 'page/rss'
+                'rss' => 'site/rss'
             ],
         ],
     ],

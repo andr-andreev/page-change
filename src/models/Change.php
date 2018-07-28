@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -14,6 +13,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $status
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property Page $page
+ * @property Category|null $category
  */
 class Change extends \yii\db\ActiveRecord
 {
@@ -54,17 +56,30 @@ class Change extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
     public function getPage()
     {
-        return $this->hasOne(Page::className(), ['id' => 'page_id']);
+        return $this->hasOne(Page::class, ['id' => 'page_id']);
     }
 
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['id' => 'category_id'])->via('page');
+        return $this->hasOne(Category::class, ['id' => 'category_id'])->via('page');
+    }
+
+    public function getExtendedTitle()
+    {
+        $parts = [];
+
+        if ($this->category) {
+            $parts[] = $this->category->title;
+        }
+
+        $parts[] = $this->page->description ?: $this->page->url;
+
+        return implode(' / ', $parts);
     }
 }

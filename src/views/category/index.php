@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'title',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'headerOptions' => [
                     'width' => 170,
                     'class' => 'text-center'

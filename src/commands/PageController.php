@@ -20,7 +20,7 @@ class PageController extends Controller
             $this->stdout("[{$page->url}]" . PHP_EOL);
 
             /** @var PageChange $pageChange */
-            $pageChange = $container->get(PageChange::className(), [$page]);
+            $pageChange = $container->get(PageChange::class, [$page]);
 
             $diff = $pageChange->makeChange();
 
