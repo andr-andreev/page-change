@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\controllers\PageChange;
 use app\models\Category;
-use app\models\Change;
 use app\models\Page;
 use app\models\PageSearch;
 use Yii;
@@ -12,7 +11,6 @@ use yii\data\ActiveDataProvider;
 use yii\di\Container;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use Zelenin\Feed;
@@ -124,7 +122,7 @@ class PageController extends Controller
         $container = new Container;
 
         /** @var \app\components\pagechange\PageChange $pageChange */
-        $pageChange = $container->get(\app\components\pagechange\PageChange::className(), [$page]);
+        $pageChange = $container->get(\app\components\pagechange\PageChange::class, [$page]);
 
         $diff = $pageChange->makeChange();
         $pageChange->saveChange($diff);
@@ -167,63 +165,5 @@ class PageController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Generates RSS feed with diffs for all pages.
-     * @return mixed
-     */
-    public function actionRss()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Change::find()->innerJoinWith(['page', 'category'])->orderBy(['id' => SORT_DESC]),
-            'pagination' => [
-                'pageSize' => Yii::$app->params['rssItemsCount']
-            ],
-        ]);
-
-        $response = Yii::$app->getResponse();
-        $headers = $response->getHeaders();
-
-        $headers->set('Content-Type', 'application/rss+xml; charset=utf-8');
-
-        echo RssView::widget([
-            'dataProvider' => $dataProvider,
-            'channel' => [
-                'title' => function ($widget, Feed $feed) {
-                    $feed->addChannelTitle(Yii::$app->params['name']);
-                },
-                'link' => Url::toRoute('/', true),
-                'description' => function ($widget, Feed $feed) {
-                    $feed->addChannelDescription(Yii::$app->params['name']);
-                },
-            ],
-            'items' => [
-                'title' => function ($model, $widget, Feed $feed) {
-                    $categoryPart = $model->category->title . ' / ';
-                    if (empty($model->page->description)) {
-                        return $categoryPart . $model->page->url;
-                    }
-
-                    return $categoryPart . $model->page->description;
-                },
-                'description' => function ($model, $widget, Feed $feed) {
-                    $formatter = \Yii::$app->formatter;
-
-                    return $formatter->asNtext(empty($model->status) ? $model->diff : $model->status);
-                },
-                'link' => function ($model, $widget, Feed $feed) {
-                    return $model->page->url;
-                },
-                'guid' => function ($model, $widget, Feed $feed) {
-                    return Url::toRoute(['change/view', 'id' => $model->id], true);
-                },
-                'pubDate' => function ($model, $widget, Feed $feed) {
-                    $date = \DateTime::createFromFormat('U', $model->updated_at);
-
-                    return $date->format(DATE_RSS);
-                }
-            ]
-        ]);
     }
 }
