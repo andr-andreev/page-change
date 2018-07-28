@@ -3,15 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\assets\AppAsset;
-use rmrevin\yii\fontawesome\FA;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use luya\bootstrap4\Bootstrap4Asset;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\Breadcrumbs;
 
-AppAsset::register($this);
+Bootstrap4Asset::register($this)
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,28 +23,32 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Page Change',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => '',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav '],
-        'encodeLabels' => false,
-        'items' => [
-            ['label' => FA::icon(FA::_LIST) . ' Webpages', 'url' => Url::toRoute('page/index')],
-            ['label' => FA::icon(FA::_TH_LIST) . ' Categories', 'url' => Url::toRoute('category/index')],
-            ['label' => FA::icon(FA::_RSS) . ' RSS', 'url' => Url::toRoute('page/rss')],
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
     <div class="container">
-        <?= Breadcrumbs::widget([
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="<?= Url::to(Yii::$app->homeUrl) ?>">Page Change</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= Url::toRoute('page/index') ?>">Webpages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= Url::toRoute('category/index') ?>">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= Url::toRoute('page/rss') ?>">RSS</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <br>
+
+        <?= \luya\bootstrap4\widgets\Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>
