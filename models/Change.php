@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -54,17 +53,17 @@ class Change extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
     public function getPage()
     {
-        return $this->hasOne(Page::className(), ['id' => 'page_id']);
+        return $this->hasOne(Page::class, ['id' => 'page_id']);
     }
 
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['id' => 'category_id'])->via('page');
+        return $this->hasOne(Category::class, ['id' => 'category_id'])->via('page');
     }
 }
