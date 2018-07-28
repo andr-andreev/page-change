@@ -69,4 +69,17 @@ class Change extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::class, ['id' => 'category_id'])->via('page');
     }
+
+    public function getExtendedTitle()
+    {
+        $parts = [];
+
+        if ($this->category) {
+            $parts[] = $this->category->title;
+        }
+
+        $parts[] = $this->page->description ?: $this->page->url;
+
+        return implode(' / ', $parts);
+    }
 }

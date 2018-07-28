@@ -43,7 +43,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'page/index',
-                'rss' => 'page/rss'
+                'rss' => 'site/rss'
             ],
         ],
     ],

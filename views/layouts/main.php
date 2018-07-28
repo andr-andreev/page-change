@@ -40,7 +40,7 @@ Bootstrap4Asset::register($this)
                         <a class="nav-link" href="<?= Url::toRoute('category/index') ?>">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= Url::toRoute('page/rss') ?>">RSS</a>
+                        <a class="nav-link" href="<?= Url::toRoute('site/rss') ?>">RSS</a>
                     </li>
                 </ul>
             </div>
