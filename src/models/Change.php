@@ -78,10 +78,8 @@ class Change extends \yii\db\ActiveRecord
             $parts[] = $this->category->title;
         }
 
-        if ($this->page !== null) {
-            $parts[] = $this->page->description ?: $this->page->url;
-        }
+        $parts[] = $this->page->description ?: $this->page->url;
 
-        return implode(' / ', $parts) ?: '(not set)';
+        return implode(' / ', $parts);
     }
 }

@@ -21,7 +21,7 @@ class SiteController extends Controller
     public function actionRss()
     {
         $changes = Change::find()
-            ->joinWith(['page', 'category'])
+            ->innerJoinWith(['page', 'category'])
             ->orderBy(['id' => SORT_DESC])
             ->limit(Yii::$app->params['rssItemsCount'])
             ->all();
