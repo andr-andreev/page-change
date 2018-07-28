@@ -3,9 +3,9 @@ Page Change is a simple webpage monitoring app based on  [Yii 2 framework](https
 
 Useful for monitoring jobs, price changes, seasonal promos, news, etc.
 
-![Dashboard](screenshots/dashboard.png?raw=true "Dashboard")
+![Dashboard](docs/screenshots/dashboard.png?raw=true "Dashboard")
 
-![Page history](screenshots/page-history.png?raw=true "Page history")
+![Page history](docs/screenshots/page-history.png?raw=true "Page history")
 
 ### Features
 * Block filter (ignore everything except the text between the markers)

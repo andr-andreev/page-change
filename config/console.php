@@ -7,7 +7,9 @@ $db = require(__DIR__ . '/db.php');
 
 $config = [
     'id' => 'pagechange-console',
-    'basePath' => dirname(__DIR__),
+    'basePath' => dirname(__DIR__) . '/src',
+    'runtimePath' => dirname(__DIR__) . '/runtime',
+    'vendorPath' => dirname(__DIR__) . '/vendor',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [

@@ -4,7 +4,9 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'pagechange',
-    'basePath' => dirname(__DIR__),
+    'basePath' => dirname(__DIR__) . '/src',
+    'runtimePath' => dirname(__DIR__) . '/runtime',
+    'vendorPath' => dirname(__DIR__) . '/vendor',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [

@@ -27,6 +27,11 @@
       "url": "https://asset-packagist.org"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "src"
+    }
+  },
   "config": {
     "sort-packages" : true,
     "process-timeout": 1800
