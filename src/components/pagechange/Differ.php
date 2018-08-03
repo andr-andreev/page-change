@@ -6,6 +6,7 @@ namespace app\components\pagechange;
 
 use app\components\pagechange\responses\ResponseInterface;
 use app\models\Page;
+use SebastianBergmann\Diff\Output\DiffOnlyOutputBuilder;
 
 /**
  * Class Differ
@@ -86,34 +87,11 @@ class Differ
             $oldContent = '';
         }
 
-        $differ = new \SebastianBergmann\Diff\Differ();
-        $diffArray = $differ->diffToArray($oldContent, $newContent);
+        $differ = new \SebastianBergmann\Diff\Differ(new DiffOnlyOutputBuilder(''));
 
-        $addedDiff = array_filter($diffArray, function ($item) {
-            return $item[1] === 1;
-        });
+        $diff = $differ->diff($oldContent, $newContent);
 
-        $removedDiff = array_filter($diffArray, function ($item) {
-            return $item[1] === 2;
-        });
-
-        $addedLines = array_map(function ($item) {
-            return '+ ' . $item[0];
-        }, $addedDiff);
-
-        $removedLines = array_map(function ($item) {
-            return '- ' . $item[0];
-        }, $removedDiff);
-
-        $diff = [];
-        if (!empty($addedLines)) {
-            $diff[] = 'Added:' . PHP_EOL . implode(PHP_EOL, $addedLines);
-        }
-        if (!empty($removedLines)) {
-            $diff[] = 'Removed:' . PHP_EOL . implode(PHP_EOL, $removedLines);
-        }
-
-        return implode($diff, PHP_EOL . PHP_EOL);
+        return $diff;
     }
 
     /*

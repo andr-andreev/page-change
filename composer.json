@@ -7,10 +7,11 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.1.0",
+    "ext-pcre": "*",
     "guzzlehttp/guzzle": "~6.0",
     "league/html-to-markdown": "^4.4",
     "luyadev/luya-bootstrap4": "~1.0.0",
-    "sebastian/diff": "~1.4",
+    "sebastian/diff": "^3.0",
     "symfony/dom-crawler": "~3.1",
     "yiisoft/yii2": "^2.0",
     "zendframework/zend-feed": "^2.10"
