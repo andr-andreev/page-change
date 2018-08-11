@@ -89,9 +89,7 @@ class Differ
 
         $differ = new \SebastianBergmann\Diff\Differ(new DiffOnlyOutputBuilder(''));
 
-        $diff = $differ->diff($oldContent, $newContent);
-
-        return $diff;
+        return $differ->diff($oldContent, $newContent);
     }
 
     /*
