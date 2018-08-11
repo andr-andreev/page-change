@@ -49,7 +49,7 @@ Bootstrap4Asset::register($this)
         <br>
 
         <?= \luya\bootstrap4\widgets\Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'links' => $this->params['breadcrumbs'] ?? [],
         ]) ?>
         <?= $content ?>
     </div>
