@@ -91,9 +91,9 @@ class PageController extends Controller
     {
         if (($model = Page::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
@@ -146,12 +146,12 @@ class PageController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-                'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
+        ]);
     }
 
     /**
