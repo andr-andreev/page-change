@@ -17,6 +17,7 @@
     "zendframework/zend-feed": "^2.10"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-master",
     "yiisoft/yii2-debug": "*",
     "yiisoft/yii2-gii": "*",
     "yiisoft/yii2-faker": "*",
