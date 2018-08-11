@@ -6,7 +6,7 @@ Page Change is a simple webpage monitoring app.
 Useful for monitoring jobs, price changes, seasonal promos, news, etc.
 
 ![Dashboard](docs/screenshots/dashboard.png?raw=true "Dashboard")
-
+---
 ![Page history](docs/screenshots/page-history.png?raw=true "Page history")
 
 ### Features
