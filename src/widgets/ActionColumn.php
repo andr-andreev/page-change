@@ -3,7 +3,6 @@
 
 namespace app\widgets;
 
-use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\helpers\Html;
 

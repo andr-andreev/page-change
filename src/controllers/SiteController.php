@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\PageChange;
 use app\models\Change;
 use Yii;
 use yii\helpers\Url;

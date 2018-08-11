@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\PageChange;
 use app\models\Category;
 use app\models\Page;
 use app\models\PageSearch;
@@ -13,8 +12,6 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use Zelenin\Feed;
-use Zelenin\yii\extensions\Rss\RssView;
 
 /**
  * PageController implements the CRUD actions for Page model.
