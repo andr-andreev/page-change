@@ -19,6 +19,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $last_status
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property Category $category
+ * @property Change[] $changes
  */
 class Page extends \yii\db\ActiveRecord
 {
