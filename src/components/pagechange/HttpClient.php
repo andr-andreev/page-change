@@ -39,6 +39,7 @@ class HttpClient
 
     /**
      * @return ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getContent(): ResponseInterface
     {

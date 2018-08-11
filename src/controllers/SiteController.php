@@ -8,7 +8,6 @@ use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
-use Zend\Feed\Exception\InvalidArgumentException;
 use Zend\Feed\Writer\Entry;
 use Zend\Feed\Writer\Feed;
 
@@ -43,7 +42,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @param Feed $feed
      */
     private function initFeed(Feed $feed)
     {
@@ -55,7 +54,9 @@ class SiteController extends Controller
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @param Entry $entry
+     * @param Change $model
+     * @return Entry
      */
     private function initFeedEntry(Entry $entry, Change $model)
     {
