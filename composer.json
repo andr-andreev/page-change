@@ -1,7 +1,7 @@
 {
   "name": "andr-andreev/page-change",
-  "description": "Yii 2 Page Change",
-  "homepage": "https://github.com/andr-andreev/yii2-page-change",
+  "description": "Page Change",
+  "homepage": "https://github.com/andr-andreev/page-change",
   "type": "project",
   "license": "GPL-3.0",
   "minimum-stability": "stable",
