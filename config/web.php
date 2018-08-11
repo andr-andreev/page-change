@@ -4,7 +4,7 @@ use yii\caching\FileCache;
 use yii\gii\Module;
 use yii\log\FileTarget;
 
-$params = require(__DIR__ . '/params.php');
+$params = require __DIR__ . '/params.php';
 
 $config = [
     'id' => 'pagechange',
@@ -36,7 +36,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
+        'db' => require __DIR__ . '/db.php',
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
