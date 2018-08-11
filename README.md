@@ -1,5 +1,7 @@
-## yii2-page-change
-Page Change is a simple webpage monitoring app based on  [Yii 2 framework](https://github.com/yiisoft/yii2).
+## Page Change
+[![Yii](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](https://www.yiiframework.com/)
+
+Page Change is a simple webpage monitoring app.
 
 Useful for monitoring jobs, price changes, seasonal promos, news, etc.
 
@@ -18,8 +20,8 @@ Useful for monitoring jobs, price changes, seasonal promos, news, etc.
 
 ### Installation
 ```bash
-$ git clone https://github.com/andr-andreev/yii2-page-change.git
-$ cd yii2-page-change
+$ git clone https://github.com/andr-andreev/page-change.git
+$ cd page-change
 $ make install
 ```
 
