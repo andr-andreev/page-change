@@ -76,7 +76,7 @@ class Page extends \yii\db\ActiveRecord
 
     public static function find()
     {
-        return new PageQuery(get_called_class());
+        return new PageQuery(static::class);
     }
 
 

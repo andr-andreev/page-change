@@ -1,5 +1,9 @@
 <?php
 
+use yii\caching\FileCache;
+use yii\gii\Module;
+use yii\log\FileTarget;
+
 $params = require(__DIR__ . '/params.php');
 
 $config = [
@@ -14,7 +18,7 @@ $config = [
             'cookieValidationKey' => 'cnT9VHZQJEHark35-BWVUV_dXiuS023h',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => FileCache::class,
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -27,7 +31,7 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -49,12 +53,12 @@ if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
+        'class' => \yii\debug\Module::class,
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
+        'class' => Module::class,
     ];
 }
 
