@@ -7,7 +7,9 @@
 
 namespace app\assets;
 
+use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -17,14 +19,13 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+
     public $css = [
         'css/site.css',
     ];
-    public $js = [
-    ];
+
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'rmrevin\yii\fontawesome\AssetBundle',
+        YiiAsset::class,
+        BootstrapAsset::class,
     ];
 }

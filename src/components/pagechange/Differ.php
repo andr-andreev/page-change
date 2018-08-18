@@ -57,7 +57,7 @@ class Differ
 
         preg_match($re, $content, $matches);
 
-        return isset($matches[0]) ? $matches[0] : $content;
+        return $matches[0] ?? $content;
     }
 
     /**
@@ -89,9 +89,7 @@ class Differ
 
         $differ = new \SebastianBergmann\Diff\Differ(new DiffOnlyOutputBuilder(''));
 
-        $diff = $differ->diff($oldContent, $newContent);
-
-        return $diff;
+        return $differ->diff($oldContent, $newContent);
     }
 
     /*

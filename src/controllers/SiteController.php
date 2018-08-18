@@ -2,12 +2,11 @@
 
 namespace app\controllers;
 
-use app\controllers\PageChange;
 use app\models\Change;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
-use Zend\Feed\Exception\InvalidArgumentException;
+use yii\web\Response;
 use Zend\Feed\Writer\Entry;
 use Zend\Feed\Writer\Feed;
 
@@ -35,12 +34,14 @@ class SiteController extends Controller
         }
 
         $response = Yii::$app->getResponse();
+        $response->format = Response::FORMAT_RAW;
         $response->getHeaders()->set('Content-Type', 'application/rss+xml; charset=utf-8');
-        $response->content = $feed->export('rss');
+
+        return $feed->export('rss');
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @param Feed $feed
      */
     private function initFeed(Feed $feed)
     {
@@ -52,7 +53,9 @@ class SiteController extends Controller
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @param Entry $entry
+     * @param Change $model
+     * @return Entry
      */
     private function initFeedEntry(Entry $entry, Change $model)
     {

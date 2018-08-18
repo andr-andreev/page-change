@@ -35,8 +35,9 @@ class PageChange extends BaseObject
 
     /**
      * @return Differ
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function makeChange(): \app\components\pagechange\Differ
+    public function makeChange(): Differ
     {
         $change = new HttpClient($this->page->url);
         $content = $change->getContent();
@@ -47,7 +48,7 @@ class PageChange extends BaseObject
     /**
      * @param Differ $diff
      */
-    public function saveChange(\app\components\pagechange\Differ $diff)
+    public function saveChange(Differ $diff)
     {
         $thisPage = $this->page;
         $response = $diff->getResponse();

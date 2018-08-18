@@ -1,7 +1,7 @@
 {
   "name": "andr-andreev/page-change",
-  "description": "Yii 2 Page Change",
-  "homepage": "https://github.com/andr-andreev/yii2-page-change",
+  "description": "Page Change",
+  "homepage": "https://github.com/andr-andreev/page-change",
   "type": "project",
   "license": "GPL-3.0",
   "minimum-stability": "stable",
@@ -17,6 +17,7 @@
     "zendframework/zend-feed": "^2.10"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-master",
     "yiisoft/yii2-debug": "*",
     "yiisoft/yii2-gii": "*",
     "yiisoft/yii2-faker": "*",

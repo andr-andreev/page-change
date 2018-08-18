@@ -16,6 +16,8 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property Page $page
  * @property Category|null $category
+ *
+ * @property string $extendedTitle
  */
 class Change extends \yii\db\ActiveRecord
 {

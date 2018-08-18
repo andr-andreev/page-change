@@ -1,7 +1,9 @@
 <?php
 
+use yii\db\Connection;
+
 return [
-    'class' => 'yii\db\Connection',
+    'class' => Connection::class,
     'dsn' => 'sqlite:@app/../data/sqlite.db',
     'username' => 'root',
     'password' => '',

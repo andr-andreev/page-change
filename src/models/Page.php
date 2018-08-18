@@ -19,11 +19,14 @@ use yii\behaviors\TimestampBehavior;
  * @property string $last_status
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property Category $category
+ * @property Change[] $changes
  */
 class Page extends \yii\db\ActiveRecord
 {
-    const STATUS_INACTIVE = 0;
-    const STATUS_ACTIVE = 1;
+    public const STATUS_INACTIVE = 0;
+    public const STATUS_ACTIVE = 1;
 
     /**
      * @inheritdoc
@@ -76,7 +79,7 @@ class Page extends \yii\db\ActiveRecord
 
     public static function find()
     {
-        return new PageQuery(get_called_class());
+        return new PageQuery(static::class);
     }
 
 

@@ -3,6 +3,7 @@
 use app\models\Category;
 use app\models\Page;
 use app\widgets\ActionColumn;
+use yii\grid\SerialColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => SerialColumn::class],
             [
                 'attribute' => 'is_active',
                 'format' => 'raw',

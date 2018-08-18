@@ -2,6 +2,7 @@
 
 use app\widgets\ActionColumn;
 use yii\grid\GridView;
+use yii\grid\SerialColumn;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             [
-                'class' => 'yii\grid\SerialColumn',
+                'class' => SerialColumn::class,
                 'headerOptions' => [
                     'width' => 40,
                 ],

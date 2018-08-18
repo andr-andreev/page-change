@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\PageChange;
 use app\models\Category;
 use app\models\Page;
 use app\models\PageSearch;
@@ -13,8 +12,6 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use Zelenin\Feed;
-use Zelenin\yii\extensions\Rss\RssView;
 
 /**
  * PageController implements the CRUD actions for Page model.
@@ -59,6 +56,7 @@ class PageController extends Controller
      * @param integer $id
      *
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -90,9 +88,9 @@ class PageController extends Controller
     {
         if (($model = Page::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
@@ -137,6 +135,7 @@ class PageController extends Controller
      * @param integer $id
      *
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -144,12 +143,12 @@ class PageController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-                'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'categories' => ArrayHelper::map(Category::find()->orderBy('title')->all(), 'id', 'title')
+        ]);
     }
 
     /**
@@ -159,6 +158,9 @@ class PageController extends Controller
      * @param integer $id
      *
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
