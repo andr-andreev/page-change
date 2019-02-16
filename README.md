@@ -26,17 +26,9 @@ $ make install
 ```
 
 ### Usage ###
-Set the document root of your webserver to the `web` folder.
+Set the document root of your web server to the `public` directory. Use your browser to access the application.
 
-To add webpage to monitoring open in your browser:
-```
-http://example.com/
-```
-To check for all webpages changes run (or add to cron):
+You can check for web page changes by running
 ```bash
 $ php yii page/check
-```
-To view changes for all webpages open in your browser:
-```
-http://example.com/rss
 ```

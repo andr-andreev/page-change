@@ -61,7 +61,7 @@ class Page extends \yii\db\ActiveRecord
             'is_active' => 'Active',
             'category_id' => 'Category',
             'description' => 'Title',
-            'url' => 'Url',
+            'url' => 'URL',
             'filter_from' => 'Filter From',
             'filter_to' => 'Filter To',
             'last_content' => 'Last Content',
