@@ -12,7 +12,7 @@
     "league/html-to-markdown": "^4.4",
     "luyadev/luya-bootstrap4": "~1.0.0",
     "sebastian/diff": "^3.0",
-    "symfony/dom-crawler": "~3.1",
+    "symfony/dom-crawler": "^4.2",
     "yiisoft/yii2": "^2.0",
     "zendframework/zend-feed": "^2.10"
   },
