@@ -1,10 +1,9 @@
 {
   "name": "andr-andreev/page-change",
+  "type": "project",
   "description": "Page Change",
   "homepage": "https://github.com/andr-andreev/page-change",
-  "type": "project",
   "license": "MIT",
-  "minimum-stability": "stable",
   "require": {
     "php": ">=7.1.0",
     "ext-pcre": "*",
@@ -18,30 +17,14 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
+    "squizlabs/php_codesniffer": "3.*",
     "yiisoft/yii2-debug": "*",
-    "yiisoft/yii2-gii": "*",
     "yiisoft/yii2-faker": "*",
-    "squizlabs/php_codesniffer": "3.*"
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "app\\": "src"
-    }
+    "yiisoft/yii2-gii": "*"
   },
   "config": {
-    "sort-packages" : true,
-    "process-timeout": 1800
-  },
-  "scripts": {
-    "post-create-project-cmd": [
-      "yii\\composer\\Installer::postCreateProject"
-    ]
+    "process-timeout": 1800,
+    "sort-packages": true
   },
   "extra": {
     "yii\\composer\\Installer::postCreateProject": {
@@ -56,5 +39,22 @@
         "config/web.php"
       ]
     }
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "src"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "minimum-stability": "stable",
+  "scripts": {
+    "post-create-project-cmd": [
+      "yii\\composer\\Installer::postCreateProject"
+    ]
   }
 }
